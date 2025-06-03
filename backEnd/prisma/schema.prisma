@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  nome      String
+  cpfCnpj   String   @unique
+  telefone  String
+  endereco  Json
+  createdAt DateTime @default(now())
+  motos     Moto[]   @relation(fields: [], references: [])
+}
+
+model Moto {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  clienteId  String   @db.ObjectId
+  cliente    Cliente? @relation(fields: [clienteId], references: [id])
+  marca      String
+  modelo     String
+  placa      String   @unique
+  ano        Int
+  cor        String
+  cilindrada Int
+}
+
+model OrdemServico {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  clienteId     String   @db.ObjectId
+  cliente       Cliente  @relation(fields: [clienteId], references: [id])
+  motoId        String   @db.ObjectId
+  moto          Moto     @relation(fields: [motoId], references: [id])
+
+  quilometragem Int
+  problema      String
+  diagnostico   String
+  status        String   
+
+  servicos      Json     
+  pecas         Json     
+
+  total         Float
+  formaPagamento String   
+  valorPago      Float
+  troco          Float
+
+  dataEntrada    DateTime @default(now())
+  dataSaida      DateTime?
+
+  observacoes    String?
+}
