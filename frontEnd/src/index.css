@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta — identidade "painel de oficina": grafite frio + laranja de ferramenta */
+  --color-ink: #14171a;
+  --color-surface: #1d2126;
+  --color-surface-raised: #262b31;
+  --color-surface-hover: #2d3339;
+  --color-border: #33393f;
+  --color-border-soft: #2a2f34;
+
+  --color-text: #edeff1;
+  --color-text-muted: #8b939c;
+  --color-text-faint: #5b6269;
+
+  --color-accent: #ef6c2f;
+  --color-accent-hover: #ff7f3f;
+  --color-accent-soft: #ef6c2f1a;
+
+  --color-success: #3fb68b;
+  --color-success-soft: #3fb68b1a;
+  --color-warning: #f2a93b;
+  --color-warning-soft: #f2a93b1a;
+  --color-danger: #e15554;
+  --color-danger-soft: #e155541a;
+  --color-info: #4f9dde;
+  --color-info-soft: #4f9dde1a;
+
+  --font-display: "Barlow Condensed", "Inter", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html,
+body {
+  background: var(--color-ink);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-color: var(--color-border) transparent;
+  scrollbar-width: thin;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+/* foco visível para acessibilidade */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
